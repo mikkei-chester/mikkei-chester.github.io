@@ -30,6 +30,6 @@ sections.forEach(s => observer.observe(s));
 // Contact form placeholder handler
 function handleForm(e) {
   e.preventDefault();
-  alert('Thanks for your message! (Wire this up to your preferred email service.)');
+  alert('Thanks for your message! Appreciate your interest. I will get back to you as soon as possible.');
   e.target.reset();
 }
