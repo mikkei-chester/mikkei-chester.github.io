@@ -109,23 +109,53 @@ button:hover,
   background: var(--border);
 }
 
-/* Mobile offcanvas menu */
+/* Offcanvas – fully themed */
 .offcanvas {
-  background: var(--surface);
-  border-left: 1px solid var(--border);
-  max-width: 260px;
+  background: var(--surface) !important;
+  border-left: 1px solid var(--border) !important;
+  max-width: 280px;
+  box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
 }
+
+/* Offcanvas header */
+.offcanvas-header {
+  border-bottom: 1px solid var(--border) !important;
+  padding: 1.25rem 1.5rem;
+}
+
+/* Close button (white "X") */
+.btn-close-white {
+  filter: invert(1) grayscale(100%) brightness(200%);
+  opacity: 0.7;
+}
+.btn-close-white:hover {
+  opacity: 1;
+}
+
+/* Offcanvas navigation links */
 .offcanvas .nav-link {
-  color: var(--muted);
+  color: var(--muted) !important;
   font-size: 1rem;
   font-weight: 500;
-  padding: 0.6rem 0.75rem;
-  border-radius: 8px;
-  transition: color 0.2s, background 0.2s;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  text-decoration: none !important;
 }
+
 .offcanvas .nav-link:hover {
-  color: var(--text);
-  background: var(--border);
+  color: var(--text) !important;
+  background: rgba(124, 109, 250, 0.1);
+  border-left: 2px solid var(--accent);
+  padding-left: calc(1rem - 2px);
+}
+
+/* Offcanvas body spacing */
+.offcanvas-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 /* Hero section */
