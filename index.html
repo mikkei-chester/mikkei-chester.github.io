@@ -5,8 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mike — Portfolio</title>
 
-  <!-- AOS -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="imgs/picshur-removebg-preview.png" />
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- AOS animations -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -15,626 +21,38 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
-
-  <style>
-    /* ─── TOKENS ─────────────────────────────────────────── */
-    :root {
-      --bg:       #0d0f14;
-      --surface:  #141720;
-      --surface2: #1b1f2b;
-      --border:   rgba(255,255,255,0.07);
-      --accent:   #7c6dfa;
-      --accent2:  #5ceac0;
-      --text:     #e8eaf2;
-      --muted:    #7c8299;
-      --ff-head:  'Playfair Display', Georgia, serif;
-      --ff-body:  'DM Sans', sans-serif;
-      --radius:   14px;
-      --nav-h:    70px;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--ff-body);
-      font-size: 1rem;
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-
-    /* ─── NOISE OVERLAY ──────────────────────────────────── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      opacity: 0.025;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    h1, h2, h3, h4 { font-family: var(--ff-head); color: var(--text); line-height: 1.2; }
-    p  { color: var(--muted); }
-    a  { color: var(--accent); text-decoration: none; }
-
-    /* ─── NAV ────────────────────────────────────────────── */
-    #mainNav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: var(--nav-h);
-      z-index: 1000;
-      background: rgba(13,15,20,0.85);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-    }
-
-    #mainNav .container-fluid { display: flex; align-items: center; gap: 1rem; }
-
-    .nav-brand {
-      font-family: var(--ff-head);
-      font-size: 1.25rem;
-      color: var(--text) !important;
-      white-space: nowrap;
-      letter-spacing: -0.02em;
-    }
-    .nav-brand span { color: var(--accent); font-style: italic; }
-    .nav-brand:hover { color: var(--accent) !important; }
-
-    .navbar-nav .nav-link {
-      color: var(--muted) !important;
-      font-size: 0.875rem;
-      font-weight: 500;
-      letter-spacing: 0.03em;
-      padding: 0.4rem 0.75rem;
-      border-radius: 6px;
-      transition: color 0.2s, background 0.2s;
-    }
-    .navbar-nav .nav-link:hover {
-      color: var(--text) !important;
-      background: var(--border);
-    }
-
-    .navbar-toggler {
-      border-color: var(--border);
-    }
-    .navbar-toggler-icon {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28232,234,242,0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-    }
-
-    .offcanvas {
-    background: var(--surface);
-    border-left: 1px solid var(--border);
-    max-width: 260px;
-    }
-    .offcanvas .nav-link {
-    color: var(--muted);
-    font-size: 1rem;
-    font-weight: 500;
-    padding: 0.6rem 0.75rem;
-    border-radius: 8px;
-    transition: color 0.2s, background 0.2s;
-    }
-    .offcanvas .nav-link:hover {
-    color: var(--text);
-    background: var(--border);
-    }
-    
-
-    /* ─── HERO ───────────────────────────────────────────── */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: calc(var(--nav-h) + 3rem) 0 5rem;
-      position: relative;
-    }
-
-    #hero::after {
-      content: '';
-      position: absolute;
-      top: -200px; right: -200px;
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(124,109,250,0.15) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent2);
-      margin-bottom: 1.25rem;
-    }
-    .hero-eyebrow::before {
-      content: '';
-      display: block;
-      width: 24px; height: 1.5px;
-      background: var(--accent2);
-    }
-
-    .hero-title {
-      font-size: clamp(2.5rem, 6vw, 4.25rem);
-      letter-spacing: -0.03em;
-      margin-bottom: 1.25rem;
-    }
-    .hero-title em { color: var(--accent); font-style: italic; }
-
-    .hero-sub {
-      font-size: 1.075rem;
-      max-width: 480px;
-      margin-bottom: 2rem;
-      color: var(--muted);
-    }
-
-    .hero-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--accent);
-      color: #fff;
-      font-family: var(--ff-body);
-      font-weight: 600;
-      font-size: 0.925rem;
-      padding: 0.75rem 1.75rem;
-      border-radius: var(--radius);
-      transition: transform 0.25s, box-shadow 0.25s;
-      box-shadow: 0 4px 20px rgba(124,109,250,0.35);
-    }
-    .hero-cta:hover {
-      color: #fff;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(124,109,250,0.5);
-    }
-    .hero-cta-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--text);
-      font-weight: 500;
-      font-size: 0.925rem;
-      padding: 0.75rem 1.5rem;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .hero-cta-ghost:hover {
-      color: var(--text);
-      border-color: var(--accent);
-      background: rgba(124,109,250,0.06);
-    }
-
-    /* Avatar placeholder */
-    .avatar-wrap {
-      width: 100%;
-      max-width: 600px;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--surface2) 0%, var(--surface) 100%);
-      border: 2px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 0 60px rgba(124,109,250,0.1);
-    }
-    .avatar-wrap .avatar-img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
-    /* decorative ring */
-    .avatar-ring {
-      position: absolute;
-      inset: -14px;
-      border-radius: 50%;
-      border: 1.5px dashed rgba(124,109,250,0.25);
-      animation: spin 30s linear infinite;
-      pointer-events: none;
-    }
-
-    .avatar-wrap {
-    width: min(400px, 80vw);
-    }
-
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ─── SECTION HELPERS ────────────────────────────────── */
-    section { padding: 5rem 0; }
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.6rem;
-    }
-    .section-title {
-      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-      letter-spacing: -0.03em;
-      margin-bottom: 0.75rem;
-    }
-    .section-sub {
-      color: var(--muted);
-      max-width: 560px;
-      margin-bottom: 3rem;
-    }
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0;
-    }
-
-    /* ─── ABOUT ──────────────────────────────────────────── */
-    #about {}
-    .about-stat {
-      text-align: center;
-      padding: 1.5rem 1rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-    }
-    .about-stat .num {
-      font-family: var(--ff-head);
-      font-size: 2rem;
-      color: var(--accent);
-    }
-    .about-stat .lbl {
-      font-size: 0.8rem;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-    }
-
-    /* ─── TECH GRID ──────────────────────────────────────── */
-    .tech-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-      gap: 0.75rem;
-      list-style: none;
-      padding: 0;
-    }
-    .tech-grid li {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1rem 0.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.6rem;
-      transition: transform 0.2s, border-color 0.2s;
-      cursor: default;
-    }
-    .tech-grid li:hover { transform: translateY(-4px); border-color: var(--accent); }
-    .tech-icon { width: 36px; height: 36px; object-fit: contain; }
-    .tech-grid li span {
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--muted);
-      letter-spacing: 0.04em;
-      text-align: center;
-      transition: color 0.2s;
-    }
-    .tech-grid li:hover span { color: var(--text); }
-
-    /* ─── EDUCATION ──────────────────────────────────────── */
-    .edu-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.75rem 2rem;
-      display: flex;
-      gap: 1.25rem;
-      align-items: flex-start;
-      transition: border-color 0.2s;
-    }
-    .edu-card:hover { border-color: var(--accent); }
-    .edu-icon {
-      min-width: 48px; height: 48px;
-      background: rgba(124,109,250,0.12);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.25rem;
-    }
-    .edu-degree {
-      font-family: var(--ff-head);
-      font-size: 1.1rem;
-      margin-bottom: 0.2rem;
-    }
-    .edu-school { font-weight: 500; color: var(--text); font-size: 0.9rem; }
-    .edu-period { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; }
-    .edu-desc   { font-size: 0.875rem; color: var(--muted); margin-top: 0.5rem; }
-
-    /* ─── EXPERIENCE / ACHIEVEMENTS ─────────────────────── */
-    .timeline { position: relative; padding-left: 1.5rem; }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 6px; bottom: 6px;
-      width: 1.5px;
-      background: linear-gradient(to bottom, var(--accent), transparent);
-    }
-    .timeline-item { position: relative; padding: 0 0 2.5rem 1.75rem; }
-    .timeline-dot {
-      position: absolute;
-      left: -1.5rem; top: 6px;
-      width: 11px; height: 11px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 3px rgba(124,109,250,0.2);
-      margin-left: 0.75rem;
-    }
-    .timeline-period {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      color: var(--accent2);
-      text-transform: uppercase;
-      margin-bottom: 0.3rem;
-    }
-    .timeline-title {
-      font-family: var(--ff-head);
-      font-size: 1.15rem;
-      margin-bottom: 0.15rem;
-    }
-    .timeline-org {
-      font-size: 0.875rem;
-      color: var(--muted);
-      margin-bottom: 0.5rem;
-    }
-    .timeline-body { font-size: 0.875rem; color: var(--muted); }
-
-    .badge-custom {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 0.3em 0.75em;
-      border-radius: 100px;
-      background: rgba(92,234,192,0.12);
-      color: var(--accent2);
-      border: 1px solid rgba(92,234,192,0.25);
-      margin-top: 0.5rem;
-    }
-
-    /* ─── PROJECTS ───────────────────────────────────────── */
-    .project-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-    .project-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--accent);
-      box-shadow: 0 12px 40px rgba(124,109,250,0.15);
-    }
-
-    .project-thumb {
-      width: 100%;
-      aspect-ratio: 16/9;
-      background: linear-gradient(135deg, var(--surface2) 0%, #1a1d2c 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      color: var(--muted);
-      opacity: 0.45;
-      flex-shrink: 0;
-      position: relative;
-      overflow: hidden;
-    }
-    .project-thumb img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
-    .project-thumb .proj-lang {
-      position: absolute;
-      top: 0.75rem; right: 0.75rem;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 0.25em 0.6em;
-      border-radius: 6px;
-      background: rgba(13,15,20,0.75);
-      color: var(--accent);
-      border: 1px solid var(--border);
-    }
-
-    .project-body {
-      padding: 1.25rem 1.5rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-    .project-title {
-      font-family: var(--ff-head);
-      font-size: 1.1rem;
-      margin-bottom: 0.4rem;
-    }
-    .project-desc {
-      font-size: 0.875rem;
-      color: var(--muted);
-      flex: 1;
-      margin-bottom: 1rem;
-    }
-    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
-    .tag {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      padding: 0.25em 0.65em;
-      border-radius: 6px;
-      background: rgba(124,109,250,0.1);
-      color: var(--accent);
-      border: 1px solid rgba(124,109,250,0.2);
-    }
-    .project-links { display: flex; gap: 0.5rem; }
-    .btn-proj {
-      font-size: 0.8rem;
-      font-weight: 600;
-      padding: 0.45rem 1rem;
-      border-radius: 8px;
-      transition: all 0.2s;
-    }
-    .btn-proj-fill {
-      background: var(--accent);
-      color: #fff;
-    }
-    .btn-proj-fill:hover { background: #6458e0; color: #fff; }
-    .btn-proj-outline {
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid var(--border);
-    }
-    .btn-proj-outline:hover { border-color: var(--accent); color: var(--accent); }
-
-    /* category pill */
-    .proj-category {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 1.25rem;
-    }
-    .proj-category::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    /* ─── CONTACT ────────────────────────────────────────── */
-    #contact {}
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 0.75rem;
-    }
-
-    .contact-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.1rem 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.85rem;
-      transition: border-color 0.2s, transform 0.2s;
-      text-decoration: none;
-      min-width: 0;
-      overflow: hidden;
-    }
-    .contact-card:hover { border-color: var(--accent); transform: translateY(-3px); }
-    .contact-icon {
-      width: 40px; height: 40px;
-      background: rgba(124,109,250,0.1);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.05rem;
-      flex-shrink: 0;
-    }
-    .contact-text { min-width: 0; overflow: hidden; }
-    .contact-label { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.1rem; }
-    .contact-value {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--text);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .form-control-custom {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      color: var(--text);
-      padding: 0.75rem 1rem;
-      font-family: var(--ff-body);
-      font-size: 0.9rem;
-      width: 100%;
-      transition: border-color 0.2s;
-      outline: none;
-    }
-    .form-control-custom::placeholder { color: var(--muted); }
-    .form-control-custom:focus { border-color: var(--accent); }
-    textarea.form-control-custom { resize: vertical; min-height: 120px; }
-
-    .btn-send {
-      width: 100%;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      padding: 0.75rem;
-      font-family: var(--ff-body);
-      font-weight: 600;
-      font-size: 0.925rem;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .btn-send:hover { background: #6458e0; transform: translateY(-2px); }
-
-    /* ─── FOOTER ─────────────────────────────────────────── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 0;
-      text-align: center;
-    }
-    footer p { font-size: 0.825rem; color: var(--muted); }
-    footer span { color: var(--accent); }
-
-    /* ─── SCROLL PROGRESS ────────────────────────────────── */
-    #progress-bar {
-      position: fixed;
-      top: 0; left: 0;
-      height: 2.5px;
-      background: linear-gradient(to right, var(--accent), var(--accent2));
-      z-index: 9999;
-      width: 0%;
-      transition: width 0.1s linear;
-    }
-
-    /* ─── UTILS ──────────────────────────────────────────── */
-    .text-accent  { color: var(--accent); }
-    .text-accent2 { color: var(--accent2); }
-  </style>
 </head>
 
+<!-- Temporary inline styles to fix white background -->
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--ff-body);
+    font-size: 1rem;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
 
-
-
-
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 0;
+  }
+</style>
 
 <body>
 
-<!-- Scroll progress -->
-<div id="progress-bar"></div>
-
-<!-- ─── NAV ──────────────────────────────────────────── -->
+<!-- Navigation Bar -->
 <nav id="mainNav">
   <div class="container-fluid px-4 px-lg-5 d-flex align-items-center justify-content-between">
-    <a class="nav-brand" href="#">Mike<span>.</span></a>
+    <a class="nav-brand text-decoration-none" href="#mainNav">Mike<span>.</span></a>
 
-    <!-- Desktop links (hidden on small screens) -->
+    <!-- Desktop menu -->
     <ul class="navbar-nav d-none d-lg-flex flex-row gap-1 mb-0">
       <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
       <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
@@ -643,7 +61,7 @@
       <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
     </ul>
 
-    <!-- Hamburger (hidden on large screens) -->
+    <!-- Mobile menu button -->
     <button class="btn p-0 d-lg-none" style="background:none; border:none;" data-bs-toggle="offcanvas" data-bs-target="#navOffcanvas">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round">
         <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
@@ -652,7 +70,7 @@
   </div>
 </nav>
 
-<!-- Offcanvas (mobile only) -->
+<!-- Mobile offcanvas -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="navOffcanvas">
   <div class="offcanvas-header border-bottom" style="border-color: var(--border) !important;">
     <span class="nav-brand">Mike<span style="color:var(--accent)">.</span></span>
@@ -667,7 +85,7 @@
   </div>
 </div>
 
-<!-- ─── HERO ─────────────────────────────────────────── -->
+<!-- Hero Section -->
 <section id="hero">
   <div class="container px-4 px-lg-5">
     <div class="row align-items-center g-4">
@@ -696,7 +114,7 @@
 
 <hr class="divider" />
 
-<!-- ─── ABOUT + TECH STACK ─────────────────────────────── -->
+<!-- About + Tech Stack -->
 <section id="about">
   <div class="container px-4 px-lg-5">
     <div class="row g-5">
@@ -721,61 +139,21 @@
         </div>
       </div>
 
-      <!-- Tech stack -->
+      <!-- Tech stack icons -->
       <div class="col-lg-7" data-aos="fade-left">
         <p class="section-label">Tech Stack</p>
         <h2 class="section-title" style="margin-bottom:1.5rem;">Tools I work with.</h2>
         <ul class="list-unstyled tech-grid">
-        <!-- Java -->
-        <li data-aos="zoom-in" data-aos-delay="50">
-            <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" />
-            <span>Java</span>
-        </li>
-        <!-- HTML -->
-        <li data-aos="zoom-in" data-aos-delay="100">
-            <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" />
-            <span>HTML5</span>
-        </li>
-        <!-- CSS -->
-        <li data-aos="zoom-in" data-aos-delay="150">
-            <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" />
-            <span>CSS3</span>
-        </li>
-        <!-- Bootstrap -->
-        <li data-aos="zoom-in" data-aos-delay="200">
-            <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" />
-            <span>Bootstrap</span>
-        </li>
-        <!-- Python -->
-        <li data-aos="zoom-in" data-aos-delay="250">
-            <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
-            <span>Python</span>
-        </li>
-        <!-- MySQL -->
-        <li data-aos="zoom-in" data-aos-delay="300">
-            <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" />
-            <span>MySQL</span>
-        </li>
-        <!-- JavaScript -->
-        <li data-aos="zoom-in" data-aos-delay="350">
-            <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" />
-            <span>JavaScript</span>
-        </li>
-        <!-- Git -->
-        <li data-aos="zoom-in" data-aos-delay="400">
-            <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" />
-            <span>Git</span>
-        </li>
-        <!-- Arduino -->
-        <li data-aos="zoom-in" data-aos-delay="450">
-            <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="Arduino" />
-            <span>Arduino</span>
-        </li>
-        <!-- Figma -->
-        <li data-aos="zoom-in" data-aos-delay="500">
-            <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" />
-            <span>Figma</span>
-        </li>
+          <li data-aos="zoom-in" data-aos-delay="50"><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" /><span>Java</span></li>
+          <li data-aos="zoom-in" data-aos-delay="100"><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" /><span>HTML5</span></li>
+          <li data-aos="zoom-in" data-aos-delay="150"><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" /><span>CSS3</span></li>
+          <li data-aos="zoom-in" data-aos-delay="200"><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" /><span>Bootstrap</span></li>
+          <li data-aos="zoom-in" data-aos-delay="250"><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" /><span>Python</span></li>
+          <li data-aos="zoom-in" data-aos-delay="300"><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" /><span>MySQL</span></li>
+          <li data-aos="zoom-in" data-aos-delay="350"><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" /><span>JavaScript</span></li>
+          <li data-aos="zoom-in" data-aos-delay="400"><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" /><span>Git</span></li>
+          <li data-aos="zoom-in" data-aos-delay="450"><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="Arduino" /><span>Arduino</span></li>
+          <li data-aos="zoom-in" data-aos-delay="500"><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" /><span>Figma</span></li>
         </ul>
       </div>
 
@@ -785,7 +163,7 @@
 
 <hr class="divider" />
 
-<!-- ─── EDUCATION ─────────────────────────────────────── -->
+<!-- Education -->
 <section id="education">
   <div class="container px-4 px-lg-5">
     <div class="row">
@@ -797,10 +175,8 @@
     </div>
 
     <div class="d-flex flex-column gap-3">
-
       <!-- University -->
       <div class="edu-card" data-aos="fade-up" data-aos-delay="50">
-        <!-- <div class="edu-icon">🎓</div> -->
         <div>
           <h4 class="edu-degree">Bachelor of Science in Information Technology</h4>
           <div class="edu-school">Davao del Norte State College — [Panabo City, Philippines]</div>
@@ -811,18 +187,16 @@
 
       <!-- Senior High -->
       <div class="edu-card" data-aos="fade-up" data-aos-delay="100">
-        <!-- <div class="edu-icon">📚</div> -->
         <div>
           <h4 class="edu-degree">Senior High School — STEM Strand</h4>
           <div class="edu-school">Panabo City National High School — [Panabo City, Philippines]</div>
-          <div class="edu-period">2020 – 2022</div>
+          <div class="edu-period">2020 – 2025</div>
           <p class="edu-desc">Completed the Science, Technology, Engineering and Mathematics (STEM) strand with an outstanding academic performance in varying subject categories. <span class="badge-custom">With Highest Honors</span> </p> 
         </div>
       </div>
 
       <!-- Junior High -->
       <div class="edu-card" data-aos="fade-up" data-aos-delay="100">
-        <!-- <div class="edu-icon">📚</div> -->
         <div>
           <h4 class="edu-degree">Junior High School — Science, Technology, and Engineering (STE)</h4>
           <div class="edu-school">Panabo City National High School — [Panabo City, Philippines]</div>
@@ -830,19 +204,18 @@
           <p class="edu-desc">Completed the Science, Technology, and Engineering (STE) strand with a slight focus on Arduino fundamentals, and also passed with excellent grades. <span class="badge-custom">With High Honors</span></p>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
 <hr class="divider" />
 
-<!-- ─── EXPERIENCE / ACHIEVEMENTS ────────────────────── -->
+<!-- Experience & Achievements -->
 <section id="experience">
   <div class="container px-4 px-lg-5">
     <div class="row g-5">
 
-      <!-- Experience -->
+      <!-- Experience timeline -->
       <div class="col-lg-6" data-aos="fade-right">
         <p class="section-label">Experience</p>
         <h2 class="section-title" style="margin-bottom:2.5rem;">What I've done.</h2>
@@ -859,7 +232,7 @@
             <div class="timeline-period">Sep 2023 – Dec 2023</div>
             <h4 class="timeline-title">RoboSpark Team</h4>
             <div class="timeline-org">Co-Developer and Programmer</div>
-            <p class="timeline-body">Assisted with the development of various Line-Following Arduino Robots. Implemented sensor integration ensuring flawless and pinpoint traversing accuracy. Secured qualification for the international robotics competition.   </p>
+            <p class="timeline-body">Assisted with the development of various Line-Following Arduino Robots. Implemented sensor integration ensuring flawless and pinpoint traversing accuracy. Secured qualification for the international robotics competition.</p>
           </div>
           <div class="timeline-item" style="padding-bottom:0">
             <div class="timeline-dot"></div>
@@ -871,7 +244,7 @@
         </div>
       </div>
 
-      <!-- Achievements -->
+      <!-- Achievements timeline -->
       <div class="col-lg-6" data-aos="fade-left">
         <p class="section-label">Achievements</p>
         <h2 class="section-title" style="margin-bottom:2.5rem;">Recognition & awards.</h2>
@@ -909,7 +282,7 @@
 
 <hr class="divider" />
 
-<!-- ─── PROJECTS ──────────────────────────────────────── -->
+<!-- Projects -->
 <section id="projects">
   <div class="container px-4 px-lg-5">
     <div class="row">
@@ -920,23 +293,19 @@
       </div>
     </div>
 
-    <!-- Java Projects -->
+    <!-- Java projects -->
     <div class="proj-category" data-aos="fade-up">Java</div>
     <div class="row g-4 mb-5">
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
         <div class="project-card">
           <div class="project-thumb">
-            <!-- Replace with: <img src="imgs/project1.jpg" alt="Project One"> -->
             No image to show
             <span class="proj-lang">Java</span>
           </div>
           <div class="project-body">
             <h5 class="project-title">PetSim RPG</h5>
             <p class="project-desc">A java file application running in command line interface simulating a pet-raising RPG using fundamental Java concepts.</p>
-            <div class="project-tags">
-              <span class="tag">Java</span>
-              <span class="tag">CLI Interaction</span>
-            </div>
+            <div class="project-tags"><span class="tag">Java</span><span class="tag">CLI Interaction</span></div>
             <div class="project-links">
               <a href="https://github.com/mikkei-chester/1stYear-Projects_COMP/blob/main/FIRST_SEM_PROJECTS/PETSIMRPG/PetSimRPG_FINAL.java" target="_blank" class="btn-proj btn-proj-fill">View Project</a>
               <a href="https://github.com/mikkei-chester/1stYear-Projects_COMP/tree/main/FIRST_SEM_PROJECTS" target="_blank" class="btn-proj btn-proj-outline">GitHub</a>
@@ -953,11 +322,7 @@
           <div class="project-body">
             <h5 class="project-title">QBank</h5>
             <p class="project-desc">A simple banking application built with Java and MySQL, featuring user authentication and basic transaction management.</p>
-            <div class="project-tags">
-              <span class="tag">Java</span>
-              <span class="tag">JDBC</span>
-              <span class="tag">MySQL</span>
-            </div>
+            <div class="project-tags"><span class="tag">Java</span><span class="tag">JDBC</span><span class="tag">MySQL</span></div>
             <div class="project-links">
               <a href="https://github.com/mikkei-chester/1stYear-Projects_COMP/tree/main/SECOND_SEM_PROJECTS/Java_Banking_Project"  target="_blank" class="btn-proj btn-proj-fill">View Project</a>
               <a href="https://github.com/mikkei-chester/1stYear-Projects_COMP/tree/main/SECOND_SEM_PROJECTS/Java_Banking_Project/src" target="_blank" class="btn-proj btn-proj-outline">GitHub</a>
@@ -967,7 +332,7 @@
       </div>
     </div>
 
-    <!-- Web Projects -->
+    <!-- Web projects -->
     <div class="proj-category" data-aos="fade-up">Web Development</div>
     <div class="row g-4 mb-5">
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
@@ -979,10 +344,7 @@
           <div class="project-body">
             <h5 class="project-title">Witty Personal Resume</h5>
             <p class="project-desc">A modern, responsive personal resume website built with HTML and CSS.</p>
-            <div class="project-tags">
-              <span class="tag">HTML</span>
-              <span class="tag">CSS</span>
-            </div>
+            <div class="project-tags"><span class="tag">HTML</span><span class="tag">CSS</span></div>
             <div class="project-links">
               <a href="https://github.com/mikkei-chester/PORTFOLIO_WEBSITE/blob/main/PersonalResumePic.png" target="_blank" class="btn-proj btn-proj-fill">View Project</a>
               <a href="https://github.com/mikkei-chester/PORTFOLIO_WEBSITE/tree/main" target="_blank" class="btn-proj btn-proj-outline">GitHub</a>
@@ -999,11 +361,7 @@
           <div class="project-body">
             <h5 class="project-title">DayBreak Corner</h5>
             <p class="project-desc">A simple website for a local coffee milktea shop, featuring a responsive design and easy navigation.</p>
-            <div class="project-tags">
-              <span class="tag">HTML</span>
-              <span class="tag">CSS</span>
-              <span class="tag">JavaScript</span>
-            </div>
+            <div class="project-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
             <div class="project-links">
               <a href="https://github.com/mikkei-chester/1stYear-Projects_COMP/tree/main/SECOND_SEM_PROJECTS/Website_Project" target="_blank" class="btn-proj btn-proj-fill">View Project</a>
               <a href="https://github.com/mikkei-chester/1stYear-Projects_COMP/tree/main/SECOND_SEM_PROJECTS/Website_Project/templates_website" target="_blank" class="btn-proj btn-proj-outline">GitHub</a>
@@ -1013,7 +371,7 @@
       </div>
     </div>
 
-    <!-- Arduino -->
+    <!-- Arduino projects -->
     <div class="proj-category" data-aos="fade-up">Arduino</div>
     <div class="row g-4">
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
@@ -1025,9 +383,7 @@
           <div class="project-body">
             <h5 class="project-title">Obstacle Avoidance Robot Car</h5>
             <p class="project-desc">A robot car that can detect and avoid obstacles using HC-SR04 ultrasonic sensor mounted on Servo Motor SG90.</p>
-            <div class="project-tags">
-              <span class="tag">Arduino</span>
-            </div>
+            <div class="project-tags"><span class="tag">Arduino</span></div>
             <div class="project-links">
               <a href="https://github.com/mikkei-chester/ARDUINO-PROJECTS_COMP/blob/main/JHS_ARDUINO_PROJ/OBSTACLE_AVOIDANCE_CAR.ino" target="_blank" class="btn-proj btn-proj-fill">View Project</a>
               <a href="https://github.com/mikkei-chester/ARDUINO-PROJECTS_COMP/tree/main/JHS_ARDUINO_PROJ" target="_blank" class="btn-proj btn-proj-outline">GitHub</a>
@@ -1044,9 +400,7 @@
           <div class="project-body">
             <h5 class="project-title">Unfinished Smart Segregator</h5>
             <p class="project-desc">An incomplete smart waste segregation project using Arduino and various sensors to classify waste.</p>
-            <div class="project-tags">
-              <span class="tag">Arduino</span>
-            </div>
+            <div class="project-tags"><span class="tag">Arduino</span></div>
             <div class="project-links">
               <a href="https://github.com/mikkei-chester/ARDUINO-PROJECTS_COMP/blob/main/UNFINISHED_SMART_SEGREGATOR_PROJ/UNFINISHED_SMART_SEGREGATOR.ino" target="_blank" class="btn-proj btn-proj-fill">View Project</a>
               <a href="https://github.com/mikkei-chester/ARDUINO-PROJECTS_COMP/tree/main/UNFINISHED_SMART_SEGREGATOR_PROJ" target="_blank" class="btn-proj btn-proj-outline">GitHub</a>
@@ -1055,13 +409,12 @@
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
 <hr class="divider" />
 
-<!-- ─── CONTACT ───────────────────────────────────────── -->
+<!-- Contact Section -->
 <section id="contact">
   <div class="container px-4 px-lg-5">
     <div class="row">
@@ -1073,7 +426,7 @@
     </div>
 
     <div class="row g-4 align-items-start">
-      <!-- Links -->
+      <!-- Contact links -->
       <div class="col-12 col-lg-5" data-aos="fade-right">
         <div class="contact-grid">
           <a href="mailto:dumail.mikechester@dnsc.edu.ph" class="contact-card">
@@ -1109,7 +462,7 @@
         </div>
       </div>
 
-      <!-- Form -->
+      <!-- Contact form -->
       <div class="col-12 col-lg-7" data-aos="fade-left">
         <form onsubmit="handleForm(event)" class="d-flex flex-column gap-3">
           <div class="row g-3">
@@ -1126,53 +479,19 @@
         </form>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ─── FOOTER ────────────────────────────────────────── -->
+<!-- Footer -->
 <footer>
   <div class="container px-4">
     <p>Built with <span>♥</span> by <strong style="color:var(--text)">Mike</strong> · 2026</p>
   </div>
 </footer>
 
-<!-- ─── SCRIPTS ───────────────────────────────────────── -->
+<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  <script>
-    AOS.init();
-  </script>
-<script>
-  AOS.init({ once: false, offset: 60, duration: 700, easing: 'ease-out-cubic' });
-
-  // Scroll progress bar
-//   window.addEventListener('scroll', () => {
-//     const total = document.body.scrollHeight - window.innerHeight;
-//     const pct   = (window.scrollY / total) * 100;
-//     document.getElementById('progress-bar').style.width = pct + '%';
-//   });
-
-  // Active nav link highlight
-  const sections = document.querySelectorAll('section[id]');
-  const links    = document.querySelectorAll('.nav-link');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        links.forEach(l => l.classList.remove('active'));
-        const active = document.querySelector(`.nav-link[href="#${e.target.id}"]`);
-        if (active) active.classList.add('active');
-      }
-    });
-  }, { rootMargin: '-40% 0px -55% 0px' });
-  sections.forEach(s => observer.observe(s));
-
-  // Contact form placeholder handler
-  function handleForm(e) {
-    e.preventDefault();
-    alert('Thanks for your message! (Wire this up to your preferred email service.)');
-    e.target.reset();
-  }
-</script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
