@@ -29,6 +29,17 @@ body {
   overflow-x: hidden;
 }
 
+html {
+  overflow-x: clip;
+  max-width: 100vw;
+}
+
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+  position: relative;
+}
+
 /* Subtle noise texture overlay */
 body::before {
   content: '';
@@ -111,9 +122,10 @@ button:hover,
 
 /* Offcanvas – fully themed */
 .offcanvas {
+  max-width: 280px !important;
+  width: 280px !important;
   background: var(--surface) !important;
   border-left: 1px solid var(--border) !important;
-  max-width: 280px;
   box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
 }
 
@@ -634,3 +646,139 @@ footer span { color: var(--accent); }
 /* Utility classes */
 .text-accent  { color: var(--accent); }
 .text-accent2 { color: var(--accent2); }
+
+
+
+
+/* ============================================
+   RESPONSIVE FIXES
+   ============================================ */
+
+/* ── Fluid type scale for headings ── */
+.hero-title   { font-size: clamp(1.9rem, 5vw, 4.25rem); }
+.section-title { font-size: clamp(1.5rem, 3vw, 2.5rem); }
+
+/* ── Avatar: never overflow its column ── */
+.avatar-wrap {
+  width: min(260px, 65vw);
+  margin: 0 auto;
+}
+.avatar-ring {
+  inset: -10px;
+}
+
+/* ── Project thumbnails: fixed height so cards stay uniform ── */
+.project-thumb {
+  height: 180px;
+  overflow: hidden;
+}
+.project-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Education cards: don't overflow on small screens ── */
+.edu-card {
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* ============================================
+   ≤ 991px  (tablet / below lg breakpoint)
+   ============================================ */
+@media (max-width: 991.98px) {
+
+  /* Sections breathe a bit less on tablets */
+  section { padding: 3.5rem 0; }
+
+  /* Hero: stack image below text, center it */
+  #hero .row { flex-direction: column; }
+  #hero .col-12.col-md-5 {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  /* About: stack at tablet */
+  #about .col-lg-5,
+  #about .col-lg-7 {
+    width: 100%;
+  }
+
+  /* Experience/Achievements: add breathing room when stacked */
+  #experience .col-lg-6 {
+    width: 100%;
+  }
+  #experience .row.g-5 > [class*="col"] + [class*="col"] {
+    padding-top: 1rem;
+  }
+
+  /* Timeline line doesn't look orphaned */
+  .timeline { padding-left: 1.25rem; }
+}
+
+/* ============================================
+   ≤ 767px  (large phones / below md)
+   ============================================ */
+@media (max-width: 767.98px) {
+
+  section { padding: 3rem 0; }
+
+  /* Hero sub text readable */
+  .hero-sub { font-size: 0.95rem; }
+
+  /* CTA buttons stack nicely */
+  #hero .d-flex.flex-wrap { gap: 0.75rem; }
+  .hero-cta, .hero-cta-ghost {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Stat cards uniform in 3-col row */
+  .about-stat .num { font-size: 1.6rem; }
+  .about-stat .lbl { font-size: 0.7rem; }
+
+  /* Tech grid smaller cards */
+  .tech-grid {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 0.6rem;
+  }
+
+  /* Project cards: full width on phones */
+  .col-md-6 { width: 100%; }
+
+  /* Contact grid: single column */
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   ≤ 575px  (small phones / below sm)
+   ============================================ */
+@media (max-width: 575.98px) {
+
+  section { padding: 2.5rem 0; }
+
+  .hero-eyebrow { font-size: 0.7rem; }
+
+  /* Nav brand smaller */
+  .nav-brand { font-size: 1.1rem; }
+
+  /* Avatar smaller on small phones */
+  .avatar-wrap { width: min(200px, 75vw); }
+
+  /* Education cards tighter */
+  .edu-card { padding: 1.25rem; }
+
+  /* Timeline dot alignment */
+  .timeline-dot { left: -1.25rem; }
+
+  /* Form inputs full width always */
+  .form-control-custom { font-size: 0.875rem; }
+
+  /* Footer text wrap gracefully */
+  footer p { font-size: 0.78rem; line-height: 1.6; }
+}
